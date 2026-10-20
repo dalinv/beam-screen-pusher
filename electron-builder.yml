@@ -63,7 +63,11 @@ dmg:
 electronDownload:
   mirror: https://npmmirror.com/mirrors/electron/
 
-# 本地打包不生成更新元数据（发布时由 CI 配置 publish: github，见 发布规范）
-publish: null
+# CI 发布到 GitHub Releases（provider 由 release.yml 配合 GH_TOKEN 使用，见 发布规范 §5 CI/CD）
+publish:
+  provider: github
+  owner: dalinv
+  repo: beam-screen-pusher
+  releaseType: release
 
 npmRebuild: false
