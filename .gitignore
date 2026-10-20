@@ -1,0 +1,12 @@
+node_modules/
+out/
+dist/
+native/build/
+*.log
+.DS_Store
+Thumbs.db
+docs/proto/.prof-*/
+
+# 构建产物与本地运行数据（发布经 GitHub Releases，不纳入仓库）
+release/
+data/

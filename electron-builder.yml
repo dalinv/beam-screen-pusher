@@ -1,0 +1,69 @@
+# 光束录推 BeamScreenPusher —— electron-builder 配置（M4 双平台打包，见 发布规范.md）
+appId: com.beamscreenpusher.app
+productName: BeamScreenPusher
+copyright: Copyright © 2026 BeamScreenPusher Contributors
+
+directories:
+  output: release
+  buildResources: build
+
+afterPack: scripts/after-pack.mjs
+
+files:
+  - out/**
+  - package.json
+
+# 打包后原生模块与 ffmpeg 二进制放 resources/（paths-service 用 process.resourcesPath 定位）
+extraResources:
+  - from: native/build/Release/screen-capture.node
+    to: native/screen-capture.node
+  - from: resources/tray.png
+    to: resources/tray.png
+  - from: resources/tray-red.png
+    to: resources/tray-red.png
+  # Windows：ffmpeg 随 npm 分发的 win32-x64 二进制
+  - from: node_modules/@ffmpeg-installer/win32-x64/ffmpeg.exe
+    to: ffmpeg/ffmpeg.exe
+    filter:
+      - '**/*'
+  # macOS：ffmpeg 二进制待 macOS 采集接入后配置（darwin-x64/arm64，见 发布规范 §5.1）
+
+win:
+  icon: build/icon.ico
+  target:
+    - target: nsis
+      arch: [x64]
+    - target: portable
+      arch: [x64]
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: 光束录推 BeamScreenPusher
+  uninstallDisplayName: 光束录推 BeamScreenPusher
+  deleteAppDataOnUninstall: false
+
+portable:
+  artifactName: BeamScreenPusher-${version}-portable.exe
+
+mac:
+  icon: build/icon.png
+  category: public.app-category.video
+  target:
+    - target: dmg
+      arch: [x64, arm64]
+    - target: zip
+      arch: [x64, arm64]
+
+dmg:
+  artifactName: BeamScreenPusher-${version}-${arch}.${ext}
+
+electronDownload:
+  mirror: https://npmmirror.com/mirrors/electron/
+
+# 本地打包不生成更新元数据（发布时由 CI 配置 publish: github，见 发布规范）
+publish: null
+
+npmRebuild: false

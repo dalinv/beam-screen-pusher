@@ -1,0 +1,45 @@
+{
+  "name": "beam-screen-pusher",
+  "version": "0.1.0",
+  "description": "光束录推 BeamScreenPusher —— 轻量开源的 Windows / macOS 桌面录屏与直播推流工具",
+  "main": "./out/main/index.js",
+  "author": "BeamScreenPusher contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/beam-screen-pusher.git"
+  },
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "start": "electron-vite preview",
+    "build:win": "electron-vite build && electron-builder --win",
+    "build:mac": "electron-vite build && electron-builder --mac",
+    "typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
+    "typecheck:web": "vue-tsc --noEmit -p tsconfig.web.json --composite false",
+    "typecheck": "npm run typecheck:node && npm run typecheck:web",
+    "build:native": "node-gyp rebuild --directory=native",
+    "test:native": "node --test tests/native.test.mjs",
+    "test:unit": "vitest run tests/unit",
+    "test:integration": "node tests/integration.mjs",
+    "test:e2e": "node tests/e2e-smoke.mjs",
+    "test": "npm run typecheck && npm run test:unit && npm run test:native && npm run test:integration && npm run test:e2e"
+  },
+  "devDependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "electron": "^44.9.0",
+    "electron-builder": "^26.15.3",
+    "electron-vite": "^6.0.0",
+    "node-addon-api": "^8.9.2",
+    "node-gyp": "^13.1.0",
+    "node-media-server": "^4.4.6",
+    "pinia": "^4.1.0",
+    "rcedit": "^5.0.1",
+    "typescript": "^5.8.3",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5",
+    "vue": "^3.5.44",
+    "vue-tsc": "^3.3.13"
+  }
+}
