@@ -38,11 +38,24 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Build installers (publish to GitHub Releases)
+      - name: Build NSIS installer (publish)
+        # 串行发布（先 NSIS 后 portable），避免 electron-builder 并行发布竞态产生重复 Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ELECTRON_BUILDER_BINARIES_MIRROR: https://npmmirror.com/mirrors/electron-builder-binaries/
-        run: npx electron-builder --win --publish always
+        run: npx electron-builder --win nsis --publish always
+
+      - name: Build portable (publish)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ELECTRON_BUILDER_BINARIES_MIRROR: https://npmmirror.com/mirrors/electron-builder-binaries/
+        run: npx electron-builder --win portable --publish always
+
+      - name: Cleanup duplicate releases
+        # 兜底：若仍出现重复 Release，保留资产最多的，删除其余
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/cleanup-gh-releases.mjs
 
   # macOS 构建（CoreGraphics 采集接入后启用）：
   # build-macos:
