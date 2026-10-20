@@ -2,7 +2,7 @@
 
 > 轻量、开箱即用的 Windows / macOS 桌面录屏与直播推流工具。像 OBS 一样强大，但更简单、更轻量。
 
-![License: MIT](https://img.shields.io/badge/License-MIT-green) ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS-blue) ![Version](https://img.shields.io/badge/Version-1.0.0-brightgreen)
+![License: MIT](https://img.shields.io/badge/License-MIT-green) ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS-blue) ![Version](https://img.shields.io/badge/Version-0.1.0-brightgreen)
 
 光束录推（BeamScreenPusher）是一款桌面工具：**一键录制屏幕为本地视频**，或**把屏幕画面实时推流到直播平台**，无需繁琐配置，打开就能用。
 
@@ -22,7 +22,7 @@
 
 ## 📥 下载安装
 
-前往 [GitHub Releases](https://github.com/你的用户名/beam-screen-pusher/releases)（仓库创建后替换链接）下载对应平台的安装包：
+前往 [GitHub Releases](https://github.com/dalinv/beam-screen-pusher/releases)下载对应平台的安装包：
 
 | 平台 | 文件 | 说明 |
 | --- | --- | --- |
